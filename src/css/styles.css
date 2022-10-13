@@ -10,11 +10,55 @@ body {
   background-color: #fafafa;
   color: #212121;
   line-height: 1.5;
+  background-color: aquamarine;
+  list-style: none;
 }
 
 #search-box {
   font: inherit;
   padding: 8px;
-  max-width: 320px;
-  margin-bottom: 16px;
+  width: 320px;
+  height: 50px;
+  margin-bottom: 10px;
+  margin-top: 30px;
+  border-radius: 10px;
+  border: black solid 3px;
+  background-color: aqua;
+}
+
+#search-box:hover,
+#search-box:focus {
+  background-color: white;
+}
+
+.earth {
+  width: 584px;
+  height: 584px;
+  background: url(https://images.squarespace-cdn.com/content/v1/54075bc0e4b010adbe14e8f3/1606245729503-OPYLHOC4JVIIF03TZOJQ/Native+Lands+Acknowledgment.jpg);
+  border-radius: 50%;
+  background-size: 600px;
+  box-shadow: inset 20px 0 20px 20px rgb(0, 0, 0);
+  margin-top: 20px;
+  margin-left: 0;
+}
+
+.country-info {
+  font-style: italic;
+  margin-left: 0;
+}
+
+.country-list {
+  font-size: 10px;
+  list-style: none;
+  align-items: center;
+  margin-left: 0;
+}
+
+.wrapper {
+  display: flex;
+  width: 1600px;
+}
+
+.name {
+  font-style: italic;
 }
