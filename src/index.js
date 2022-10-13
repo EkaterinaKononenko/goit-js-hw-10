@@ -18,7 +18,8 @@ function onInput(e) {
   const countries = e.target.value.toLowerCase().trim();
 
   if (countries === '') {
-    refs.innerHTML = '';
+    refs.countryInfo.innerHTML = '';
+    refs.countryList.innerHTML = '';
     return;
   }
 
