@@ -16,30 +16,46 @@ refs.input.addEventListener('input', debounce(onInput, delay));
 
 function onInput(e) {
   const countries = e.target.value.toLowerCase().trim();
+  cleanInputRequest();
 
-  if (countries === '') {
-    refs.countryInfo.innerHTML = '';
-    refs.countryList.innerHTML = '';
-    return;
+  if (countries.length >= 1) {
+    fetchCountries(countries)
+      .then(renderCountriesInfo)
+      .catch(error =>
+        Notify.failure('Oops, there is no country with that name')
+      );
   }
+}
 
-  fetchCountries(countries)
-    .then(renderCountriesInfo)
-    .catch(error => Notify.failure('Oops, there is no country with that name'));
+function cleanInputRequest() {
+  refs.countryInfo.innerHTML = '';
+  refs.countryList.innerHTML = '';
+  return;
 }
 
 function renderCountriesInfo(countries) {
   if (countries.length > 10) {
+    cleanInputRequest();
+    createNotification();
+  }
+
+  if (countries.length >= 2 && countries.length <= 10) {
+    cleanInputRequest();
+    createMarkupForAFewCountries();
+  }
+
+  if (countries.length === 1) {
+    cleanInputRequest();
+    createMarkupForOneCountry();
+  }
+
+  function createNotification() {
     Notify.info('Too many matches found. Please enter a more specific name.');
     refs.innerHTML = '';
     console.log(countries);
   }
 
-  renderCountriesList(countries);
-}
-
-function renderCountriesList(countries) {
-  if (countries.length >= 2 && countries.length <= 10) {
+  function createMarkupForAFewCountries() {
     const markup = countries
       .map(({ name, flags }) => {
         return `<li>
@@ -53,7 +69,7 @@ function renderCountriesList(countries) {
     console.log(countries);
   }
 
-  if (countries.length === 1) {
+  function createMarkupForOneCountry() {
     const markup = countries
       .map(({ name, capital, population, flags, languages }) => {
         return `<img src="${flags.svg}" alt="${name.official}" width="30px">
